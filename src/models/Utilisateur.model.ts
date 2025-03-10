@@ -7,8 +7,7 @@ interface UtilisateurAttributes {
     nom: string;
     password: string,
     email: string;
-    createdAt?: Date;
-    status: Boolean;
+    status: boolean;
     
 }
 
@@ -18,7 +17,7 @@ class Utilisateur extends Model<UtilisateurAttributes>
     public nom!: string;
     public password!: string;
     public email!: string;
-    public status!: Boolean;
+    public status!: boolean;
     
 }
 

@@ -2,6 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { testConnection } from './config/database';
 import { syncDatabase } from './models/syncModels';
+import swaggerDocs from './config/swagger';
+import swaggerUi from 'swagger-ui-express'
 
 //Création d'un serveur Express
 const app = express();
@@ -18,6 +20,9 @@ testConnection().then(() => syncDatabase());
 //TODO ajouter ici les routes
 //app.listen indique au serveur d'écouter les requêtes HTTP arrivant sur le
 //port indiqué
+
+// Swagger route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.listen(PORT, () => {
  console.log(`Server is running on http://localhost:${PORT}`);
 });
