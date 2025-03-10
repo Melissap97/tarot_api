@@ -1,27 +1,27 @@
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/database";
 
-// Définition des attributs d'un utilisateur
-interface UtilisateurAttributes {
+// Définition des attributs d'un Utilisateurs
+interface UtilisateursAttributes {
     id?: number;
     nom: string;
     password: string,
     email: string;
-    status: boolean;
+    premium: boolean;
     
 }
 
-class Utilisateur extends Model<UtilisateurAttributes>
-    implements UtilisateurAttributes {
+class Utilisateurs extends Model<UtilisateursAttributes>
+    implements UtilisateursAttributes {
     public id!: number;
     public nom!: string;
     public password!: string;
     public email!: string;
-    public status!: boolean;
+    public premium!: boolean;
     
 }
 
-Utilisateur.init(
+Utilisateurs.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -44,16 +44,17 @@ Utilisateur.init(
                 isEmail: true,
             },
         },
-        status: {
+        premium: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
+            
         },
     },
     {
         sequelize,
         tableName: "utilisateurs",
-        timestamps: true, // Ajoute createdAt & updatedAt
+        timestamps: false,
     }
 );
 
-export default Utilisateur;
+export default Utilisateurs;

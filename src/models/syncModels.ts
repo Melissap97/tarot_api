@@ -1,5 +1,7 @@
 import sequelize from "../config/database";
-import Utilisateur from "./Utilisateur.model";
+import Utilisateurs from "./Utilisateurs.model";
+import Cartes from "./Cartes.model"
+import Tirages from "./Tirages.model";
 
 
 const syncDatabase = async () => {
@@ -12,4 +14,4 @@ const syncDatabase = async () => {
     console.error("Erreur lors de la synchronisation :", error);
     }
    };
-   export { syncDatabase, Utilisateur };
+   export { syncDatabase, Utilisateurs, Cartes, Tirages};

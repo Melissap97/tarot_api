@@ -6,10 +6,8 @@ const router = express .Router ();
  * @swagger
  * /users:
  *   post:
- *     summary: Créer un utilisateur
- *     description: Ajoute un nouvel utilisateur avec son nom et son email.
- *     tags:
- *       - Utilisateurs
+ *     summary: Create a new user
+ *     description: Create a new user with the provided fields (nom, password, email, status).
  *     requestBody:
  *       required: true
  *       content:
@@ -18,18 +16,25 @@ const router = express .Router ();
  *             type: object
  *             required:
  *               - nom
+ *               - password
  *               - email
+ *               - status
  *             properties:
  *               nom:
  *                 type: string
- *                 example: "Dupont"
+ *                 description: The name of the user.
+ *               password:
+ *                 type: string
+ *                 description: The password of the user.
  *               email:
  *                 type: string
- *                 format: email
- *                 example: "dupont@example.com"
+ *                 description: The email of the user.
+ *               status:
+ *                 type: string
+ *                 description: The status of the user.
  *     responses:
  *       200:
- *         description: Utilisateur créé avec succès
+ *         description: User successfully created
  *         content:
  *           application/json:
  *             schema:
@@ -37,15 +42,15 @@ const router = express .Router ();
  *               properties:
  *                 id:
  *                   type: integer
- *                   example: 1
+ *                   description: The unique ID of the user.
  *                 nom:
  *                   type: string
- *                   example: "Dupont"
+ *                   description: The name of the user.
  *                 email:
  *                   type: string
- *                   example: "dupont@example.com"
+ *                   description: The email of the user.
  *       500:
- *         description: Erreur serveur
+ *         description: Internal server error
  */
 router.post("/", createUser);
 

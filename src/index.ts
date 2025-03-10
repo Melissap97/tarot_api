@@ -4,6 +4,7 @@ import { testConnection } from './config/database';
 import { syncDatabase } from './models/syncModels';
 import swaggerDocs from './config/swagger';
 import swaggerUi from 'swagger-ui-express'
+import userRoutes from './routes/userRoutes';
 
 //Création d'un serveur Express
 const app = express();
@@ -21,6 +22,7 @@ testConnection().then(() => syncDatabase());
 //app.listen indique au serveur d'écouter les requêtes HTTP arrivant sur le
 //port indiqué
 
+app.use('/users', userRoutes);
 // Swagger route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.listen(PORT, () => {
