@@ -1,5 +1,5 @@
 import express from "express" ;
-import { createUser } from "../controllers/userController" ;
+import { createUser, getAllUsers } from "../controllers/userController" ;
 const router = express .Router ();
 
 /**
@@ -7,7 +7,7 @@ const router = express .Router ();
  * /users:
  *   post:
  *     summary: Create a new user
- *     description: Create a new user with the provided fields (nom, password, email, status).
+ *     description: Create a new user with the provided fields (nom, password, email, premium).
  *     requestBody:
  *       required: true
  *       content:
@@ -18,7 +18,7 @@ const router = express .Router ();
  *               - nom
  *               - password
  *               - email
- *               - status
+ *               - premium
  *             properties:
  *               nom:
  *                 type: string
@@ -29,9 +29,9 @@ const router = express .Router ();
  *               email:
  *                 type: string
  *                 description: The email of the user.
- *               status:
+ *               premium:
  *                 type: string
- *                 description: The status of the user.
+ *                 description: The premium of the user.
  *     responses:
  *       200:
  *         description: User successfully created
@@ -53,5 +53,34 @@ const router = express .Router ();
  *         description: Internal server error
  */
 router.post("/", createUser);
+
+/**
+ * @swagger
+ * /users:
+ *   get:
+ *     summary: Get all users
+ *     description: Fetch all the users from the database
+ *     responses:
+ *       200:
+ *         description: A list of users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   signification:
+ *                     type: string
+ *                   image:
+ *                     type: string
+ *       500:
+ *         description: Internal server error
+ */
+router.get("/", getAllUsers);
+
+
 
 export default router ;
