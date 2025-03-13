@@ -67,10 +67,12 @@ Tirages.init(
 
 Tirages.belongsTo(Utilisateurs, { foreignKey: "utilisateur_id" });
 Utilisateurs.hasMany(Tirages, { foreignKey: "utilisateur_id" });
-Tirages.belongsTo(Cartes, { foreignKey: "carte_id" });
-Tirages.hasOne(Cartes, { foreignKey: "carte_id" });
-Tirages.belongsTo(CartesPremium, { foreignKey: "carte_id" });
-Tirages.hasOne(CartesPremium, { foreignKey: "carte_id" });
+
+Tirages.belongsTo(Cartes, { foreignKey: "carte_id" }); 
+Cartes.hasMany(Tirages, { foreignKey: "carte_id" }); 
+
+Tirages.belongsTo(CartesPremium, { foreignKey: "carte_premium_id" }); 
+CartesPremium.hasMany(Tirages, { foreignKey: "carte_premium_id" });
 
 export default Tirages;
 

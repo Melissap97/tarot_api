@@ -53,7 +53,7 @@ Utilisateurs.init(
     },
     {
         sequelize,
-        tableName: "utilisateurs",
+        tableName: "Utilisateurs",
         timestamps: false,
     }
 );
