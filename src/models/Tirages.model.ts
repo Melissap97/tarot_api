@@ -2,12 +2,14 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/database";
 import Utilisateurs from "./Utilisateurs.model";
 import Cartes from "./Cartes.model";
+import CartesPremium from "./CartesPremium.model";
 
 
 interface TiragesAttributes {
     id?: number;
     utilisateur_id?: number;
     carte_id: number;
+    carte_premium_id: number | null;
 }
 
 class Tirages extends Model<TiragesAttributes>
@@ -15,6 +17,7 @@ class Tirages extends Model<TiragesAttributes>
     public id!: number;
     public utilisateur_id!: number;
     public carte_id!: number;
+    public carte_premium_id!: number | null;
     public readonly date!: Date;
 }
 
@@ -43,6 +46,15 @@ Tirages.init(
             },
             onDelete: "CASCADE",
         },
+        carte_premium_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: CartesPremium,
+                key: "id",
+            },
+            onDelete: "CASCADE",
+        },
     },
     {
         sequelize,
@@ -57,6 +69,8 @@ Tirages.belongsTo(Utilisateurs, { foreignKey: "utilisateur_id" });
 Utilisateurs.hasMany(Tirages, { foreignKey: "utilisateur_id" });
 Tirages.belongsTo(Cartes, { foreignKey: "carte_id" });
 Tirages.hasOne(Cartes, { foreignKey: "carte_id" });
+Tirages.belongsTo(CartesPremium, { foreignKey: "carte_id" });
+Tirages.hasOne(CartesPremium, { foreignKey: "carte_id" });
 
 export default Tirages;
 

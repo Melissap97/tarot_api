@@ -7,7 +7,7 @@ interface UtilisateursAttributes {
     nom: string;
     password: string,
     email: string;
-    premium: boolean;
+    premium?: boolean; //? signifie que l'attribut est optionnel
     
 }
 
@@ -47,6 +47,7 @@ Utilisateurs.init(
         premium: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
+            defaultValue: false,
             
         },
     },

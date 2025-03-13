@@ -5,6 +5,7 @@ import { syncDatabase } from './models/syncModels';
 import swaggerDocs from './config/swagger';
 import swaggerUi from 'swagger-ui-express'
 import userRoutes from './routes/userRoutes';
+import authRoutes from './routes/authRoutes';
 
 //Création d'un serveur Express
 const app = express();
@@ -23,6 +24,8 @@ testConnection().then(() => syncDatabase());
 //port indiqué
 
 app.use('/users', userRoutes);
+app.use('/register', authRoutes);
+
 // Swagger route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.listen(PORT, () => {
