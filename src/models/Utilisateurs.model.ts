@@ -5,7 +5,7 @@ import sequelize from "../config/database";
 interface UtilisateursAttributes {
     id?: number;
     nom: string;
-    password: string,
+    hashedPassword: string,
     email: string;
     premium?: boolean; //? signifie que l'attribut est optionnel
     
@@ -15,7 +15,7 @@ class Utilisateurs extends Model<UtilisateursAttributes>
     implements UtilisateursAttributes {
     public id!: number;
     public nom!: string;
-    public password!: string;
+    public hashedPassword!: string;
     public email!: string;
     public premium!: boolean;
     
@@ -32,7 +32,7 @@ Utilisateurs.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        password: {
+        hashedPassword: {
             type: DataTypes.STRING,
             allowNull: false,
         },
