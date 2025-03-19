@@ -8,6 +8,7 @@ interface UtilisateursAttributes {
     hashedPassword: string,
     email: string;
     premium?: boolean; //? signifie que l'attribut est optionnel
+    admin?: boolean; 
     
 }
 

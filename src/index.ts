@@ -7,6 +7,10 @@ import swaggerUi from 'swagger-ui-express'
 import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
 import { v2 as cloudinary } from 'cloudinary';
+import helmet from 'helmet';
+import cors from 'cors';
+import tirageRoutes from './routes/tirageRoutes';
+import cartesRoutes from './routes/cartesRoutes';
 
 
 //Création d'un serveur Express
@@ -67,8 +71,41 @@ testConnection().then(() => syncDatabase());
 //app.listen indique au serveur d'écouter les requêtes HTTP arrivant sur le
 //port indiqué
 
+// Activer helmet pour sécuriser les en-têtes HTTP
+app.use(
+    helmet({
+    contentSecurityPolicy: {
+    directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", "'nonce-random123'"],
+    styleSrc: ["'self'"], // Supprimer 'strict-dynamic'
+    imgSrc: ["'self'"], // Supprimer 'data:'
+    objectSrc: ["'none'"],
+    baseUri: ["'self'"],
+    formAction: ["'self'"],
+    frameAncestors: ["'none'"],
+    scriptSrcAttr: ["'none'"],
+    upgradeInsecureRequests: [],
+    },
+    },
+    })
+   );
+   
+   // Activer CORS uniquement pour une seule origine
+//curl ifconfig.me pour connaître l'ip publique de votre pc
+const corsOptions = {
+    origin: process.env.CLIENT_URL || "http://localhost:4200", // Placer le domaine du client pour l'autoriser
+    methods: 'GET,POST,DELETE,PUT', // Restreindre les méthodes autorisées
+    allowedHeaders: 'Content-Type,Authorization', // Définir les en-têtes acceptés
+    credentials: true // Autoriser les cookies et les headers sécurisés
+   };
+   app.use(cors(corsOptions));
+
+
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
+app.use('/tirages', tirageRoutes);
+app.use('/cartes', cartesRoutes);
 
 // Swagger route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));

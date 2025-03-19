@@ -7,8 +7,8 @@ const router = express .Router ();
  * @swagger
  * /auth/register:
  *   post:
- *     summary: Create a new user
- *     description: This endpoint allows you to create a new user with a name, email, and password.
+ *     summary: Créer un nouvel utilisateur
+ *     description: Permet à un utilisateur de s'inscrire grâce à un nom, email, et mot de passe.
  *     tags: [Authentification]
  *     requestBody:
  *       required: true
@@ -19,17 +19,17 @@ const router = express .Router ();
  *             properties:
  *               nom:
  *                 type: string
- *                 description: The name of the user.
+ *                 description: Le nom de l'utilisateur
  *               email:
  *                 type: string
- *                 description: The email address of the user.
+ *                 description: L'email de l'utilisateur
  *                 format: email
  *               password:
  *                 type: string
- *                 description: The password for the user.
+ *                 description: Le mot de passe d'utilisateur
  *     responses:
  *       200:
- *         description: User created successfully.
+ *         description: Utilisateur créé avec succès
  *         content:
  *           application/json:
  *             schema:
@@ -37,15 +37,15 @@ const router = express .Router ();
  *               properties:
  *                 id:
  *                   type: integer
- *                   description: The ID of the created user.
+ *                   description: L'ID de l'utilisateur créé
  *                 nom:
  *                   type: string
- *                   description: The name of the user.
+ *                   description: Le nom de l'utilisateur
  *                 email:
  *                   type: string
- *                   description: The email address of the user.
+ *                   description: L'email de l'utilisateur
  *       500:
- *         description: Internal Server Error.
+ *         description: Erreur interne du serveur
  *         content:
  *           application/json:
  *             schema:
@@ -53,7 +53,7 @@ const router = express .Router ();
  *               properties:
  *                 message:
  *                   type: string
- *                   description: The error message.
+ *                   description: The error message
  *                 error:
  *                   type: string
  *                   description: Detailed error information.
@@ -65,7 +65,7 @@ router.post("/register", register);
  * /auth/login:
  *   post:
  *     summary: Authentification de l'utilisateur
- *     description: Permet à un utilisateur de se connecter avec un nom, un email et un mot de passe
+ *     description: Permet à un utilisateur de se connecter avec un nom, un email et un mot de passe.
  *     tags: [Authentification]
  *     requestBody:
  *       required: true
@@ -111,7 +111,7 @@ router.post("/register", register);
  *                   type: string
  *                   example: "Mot de passe incorrect"
  *       404:
- *         description: Utilisateur ou email non trouvé
+ *         description: Utilisateur ou email introuvable
  *         content:
  *           application/json:
  *             schema:

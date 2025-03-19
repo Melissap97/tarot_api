@@ -3,7 +3,7 @@ import Utilisateurs from "../models/Utilisateurs.model";
 import { validateSchema } from "../Utils/JoiUtils";
 import { loginSchema, registerSchema } from "../JoiValidators/authValidators";
 import { hashPassword, verifyPassword } from "../Utils/PWDUtils";
-import { generateToken } from "./JWTUtils";
+import { generateToken } from "../Utils/JWTUtils";
 
 export async function register(req:Request, res:Response){
     try{
@@ -35,7 +35,7 @@ export async function login(req:Request, res:Response){
 
          //Erreur si nom pas trouvé
         if(!nom){
-            res.status(404).json({message: 'Nom d\'utilisateur non trouvé'});
+            res.status(404).json({message: 'Nom d\'utilisateur introuvable'});
             return 
         }
         if(!user){
@@ -44,7 +44,7 @@ export async function login(req:Request, res:Response){
         }
         
         if(!email){
-            res.status(404).json({message: 'Email non trouvé'});
+            res.status(404).json({message: 'Email introuvable'});
             return 
         }
         //Vérification du mot de passe hashé selon l'utilisateur

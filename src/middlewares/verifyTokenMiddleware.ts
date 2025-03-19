@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { NextFunction, Request, Response } from 'express';
-import { verifyToken } from '../controllers/JWTUtils';
+import { verifyToken } from '../Utils/JWTUtils';
 dotenv.config();
 
 //Récupération de la clé secrète
