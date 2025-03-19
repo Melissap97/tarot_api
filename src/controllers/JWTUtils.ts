@@ -1,22 +1,22 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-const SECRET_KEY: string | undefined = process.env.SECRET_KEY;
+const JWT_KEY: string | undefined = process.env.JWT_KEY;
 
 export function generateToken(payload: object): string {
 
-    if (!SECRET_KEY) {
-        throw new Error("JWT_SECRET non présente dans les variables d'environnement")
+    if (!JWT_KEY) {
+        throw new Error("JWT_JWT non présente dans les variables d'environnement")
     }
 
-    return jwt.sign(payload, SECRET_KEY, { expiresIn: '10000h' })
+    return jwt.sign(payload, JWT_KEY, { expiresIn: '10000h' })
 }
 
 export function verifyToken(token: string): string | JwtPayload | null {
-    if (!SECRET_KEY) {
-        throw new Error("JWT_SECRET non présente dans les variables d'environnement")
+    if (!JWT_KEY) {
+        throw new Error("JWT_KEY non présente dans les variables d'environnement")
     }
     try {
-        return jwt.verify(token, SECRET_KEY)
+        return jwt.verify(token, JWT_KEY)
     } catch (err: any) {
         return null;
     }

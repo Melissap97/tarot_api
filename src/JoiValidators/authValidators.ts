@@ -1,13 +1,18 @@
 import Joi from "joi";
 
 export const loginSchema = Joi.object({
-    name: Joi.string().min(3).max(30).required(),
-    password: Joi.string().min(8).required()
+    nom: Joi.string().min(3).max(30).required(),
+    password: Joi.string().min(8).required(),
+    email: Joi.string().email().required()
+        .messages({
+            'string.empty': 'L\'email est requis.',
+            'string.email': 'L\'email doit être valide.'
+        })
    });
 
    // Définition du schéma de validation pour l'inscription
    export const registerSchema = Joi.object({
-       name: Joi.string().min(3).max(30).required()
+       nom: Joi.string().min(3).max(30).required()
        .messages({
        'string.empty': 'Le nom est requis.',
        'string.min': 'Le nom doit contenir au moins 3 caractères.',
@@ -21,6 +26,11 @@ export const loginSchema = Joi.object({
     'string.empty' : 'Le mot de passe est requis.' ,
     'string.min': 'Le mot de passe doit contenir au moins 8 caractères.' ,
     'string.pattern.base' : 'Le mot de passe doit contenir au moins un chiffre et un caractère spécial.'
+    }),
+    email: Joi.string().email().required()
+    .messages({
+        'string.empty': 'L\'email est requis.',
+        'string.email': 'L\'email doit être valide.'
     })
     
    });

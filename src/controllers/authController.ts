@@ -31,13 +31,18 @@ export async function login(req:Request, res:Response){
     try {
         const { nom, email, password } = validateSchema(req, loginSchema);
         //Recherche de l'utilisateur par son nom
-         const user= await Utilisateurs.findOne(email);
+         const user= await Utilisateurs.findOne({where:{nom}});
 
          //Erreur si nom pas trouvé
-        if(!user){
-            res.status(404).json({message: 'Utilisateur non trouvé'});
+        if(!nom){
+            res.status(404).json({message: 'Nom d\'utilisateur non trouvé'});
             return 
         }
+        if(!user){
+            res.status(404).json({message: 'Utilisateur introuvable'});
+            return 
+        }
+        
         if(!email){
             res.status(404).json({message: 'Email non trouvé'});
             return 

@@ -68,7 +68,7 @@ testConnection().then(() => syncDatabase());
 //port indiqué
 
 app.use('/users', userRoutes);
-app.use('/register', authRoutes);
+app.use('/auth', authRoutes);
 
 // Swagger route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
