@@ -67,16 +67,7 @@ export async function createTirage(req: CustomRequest, res: Response) {
             carte_image: req.selectedCard.image,
         });
 
-        res.status(200).json({
-            message: "Tirage réussi !",
-            tirage,
-            carte: {
-                id: req.selectedCard.id,
-                nom: req.selectedCard.nom,
-                signification: req.selectedCard.signification,
-                image: req.selectedCard.image,
-            },
-        });
+        res.status(200).json({message: "Tirage réussi !",tirage });
     } catch (error) {
         console.error(" Erreur lors de la création du tirage:", error);
         res.status(500).json({ message: "Erreur serveur" });

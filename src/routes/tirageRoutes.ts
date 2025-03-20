@@ -6,63 +6,17 @@ const router = express .Router ();
 
 /**
  * @swagger
- * components:
- *   schemas:
- *     Tirage:
- *       type: object
- *       required:
- *         - utilisateur_id
- *         - carte_id
- *         - carte_nom
- *         - carte_signification
- *         - carte_image
- *       properties:
- *         utilisateur_id:
- *           type: string
- *           description: ID of the user who created the tirage
- *         carte_id:
- *           type: string
- *           description: ID of the card
- *         carte_nom:
- *           type: string
- *           description: Name of the card
- *         carte_signification:
- *           type: string
- *           description: Meaning of the card
- *         carte_image:
- *           type: string
- *           description: Image URL of the card
- *         carte_premium_id:
- *           type: string
- *           description: ID of the premium card (if any)
- *         carte_premium_nom:
- *           type: string
- *           description: Name of the premium card (if any)
- *         carte_premium_signification:
- *           type: string
- *           description: Meaning of the premium card (if any)
- *         carte_premium_image:
- *           type: string
- *           description: Image URL of the premium card (if any)
- *
- * /tirages:
+ * /tirages/nouveauTirage/:
  *   post:
- *     summary: Create a new tirage (card draw)
- *     description: Allows a user to draw a card (either regular or premium).
- *     operationId: createTirage
+ *     summary: Effectue un tirage de carte de tarot
+ *     description: Permet à un utilisateur authentifié d'effectuer un tirage aléatoire d'une carte de tarot (premium ou non).
  *     tags:
- *       - Tirage
+ *       - Tirages
  *     security:
- *       - bearerAuth: []  # Assuming token-based authentication (JWT)
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Tirage'
+ *       - cookieAuth: []
  *     responses:
  *       200:
- *         description: Tirage successfully created
+ *         description: Tirage réussi, retourne la carte sélectionnée.
  *         content:
  *           application/json:
  *             schema:
@@ -70,39 +24,31 @@ const router = express .Router ();
  *               properties:
  *                 message:
  *                   type: string
- *                   example: Tirage créé avec succès
+ *                   example: "Tirage réussi !"
  *                 tirage:
- *                   $ref: '#/components/schemas/Tirage'
- *       400:
- *         description: Utilisateur introuvable
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Utilisateur introuvable"
- *       404:
- *         description: Carte introuvable
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Aucune carte trouvée"
+ *                   type: object
+ *                   properties:
+ *                     utilisateur_id:
+ *                       type: integer
+ *                       example: 5
+ *                     carte_id:
+ *                       type: integer
+ *                       example: 12
+ *                     carte_nom:
+ *                       type: string
+ *                       example: "Le Pendu"
+ *                     carte_signification:
+ *                       type: string
+ *                       example: "Changement de perspective"
+ *                     carte_image: 
+ *                       type: string
+ *                       example: "pendu.png"
+ *       401:
+ *         description: L'utilisateur n'est pas authentifié.
+ *       403:
+ *         description: Le token est invalide ou expiré.
  *       500:
- *         description: Erreur serveur
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Erreur serveur"
+ *         description: Erreur serveur.
  */
 router.post("/nouveauTirage/",verifyTokenMiddleware, isPremium, createTirage)
 
