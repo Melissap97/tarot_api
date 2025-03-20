@@ -3,7 +3,7 @@ import sequelize from "../config/database";
 
 
 interface CartesPremiumAttributes {
-    id?: number;
+    id: number;
     nom: string;
     signification: string;
     image: string, 
@@ -14,7 +14,7 @@ class CartesPremium extends Model<CartesPremiumAttributes>
     public id!: number;
     public nom!: string;
     public signification!: string;
-    public image!: string;
+    public image!: string; 
 }
 
 CartesPremium.init(
@@ -29,7 +29,7 @@ CartesPremium.init(
             allowNull: false,
         },
         signification: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
         },
         image: {

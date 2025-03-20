@@ -80,15 +80,15 @@ router.post("/register", register);
  *             properties:
  *               nom:
  *                 type: string
- *                 example: "utilisateur123"
+ *                 example: "Joanna"
  *               email:
  *                 type: string
  *                 format: email
- *                 example: "user@example.com"
+ *                 example: "Joanna@example.com"
  *               password:
  *                 type: string
  *                 format: password
- *                 example: "MotDePasse123!"
+ *                 example: "password@0"
  *     responses:
  *       200:
  *         description: Connexion réussie

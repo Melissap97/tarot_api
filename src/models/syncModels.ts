@@ -13,5 +13,5 @@ const syncDatabase = async () => {
     } catch (error) {
     console.error("Erreur lors de la synchronisation :", error);
     }
-   };
+   }; 
    export { syncDatabase, Utilisateurs, Cartes, Tirages};

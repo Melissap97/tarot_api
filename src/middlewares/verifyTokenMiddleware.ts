@@ -4,12 +4,12 @@ import { verifyToken } from '../Utils/JWTUtils';
 dotenv.config();
 
 //Récupération de la clé secrète
-const SECRET_KEY = process.env.SECRET_KEY;
+const JWT_KEY = process.env.JWT_KEY;
 
 export function verifyTokenMiddleware(req: Request, res: Response, next: NextFunction): void {
     //Vérification de la clé secrète et gestion d'erreur
-    if (SECRET_KEY === undefined) {
-        throw new Error("SECRET_KEY non présente dans les variables d'environnement")
+    if (JWT_KEY === undefined) {
+        throw new Error("JWT_KEY non présente dans les variables d'environnement. Veuillez vous connecter.")
     }
     //Récupération du cookie dans le header
     const cookie = req.headers.cookie;

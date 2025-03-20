@@ -1,5 +1,6 @@
 import express from "express" ;
 import { getAllCartes, getAllCartesPremium } from "../controllers/cartesController";
+import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware";
 const router = express .Router ();
 
 /**
@@ -22,7 +23,7 @@ const router = express .Router ();
  *       500:
  *         description: Erreur serveur
  */
-router.get("/", getAllCartes);
+router.get("/", verifyTokenMiddleware, getAllCartes);
 
 /**
  * @swagger
@@ -44,5 +45,5 @@ router.get("/", getAllCartes);
  *       500:
  *         description: Erreur serveur
  */
-router.get("/premium", getAllCartesPremium); //ajouter middleware isPremium
+router.get("/premium",verifyTokenMiddleware, getAllCartesPremium); //ajouter middleware isPremium
 export default router ;

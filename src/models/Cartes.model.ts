@@ -3,7 +3,7 @@ import sequelize from "../config/database";
 
 
 interface CartesAttributes {
-    id?: number;
+    id: number;
     nom: string;
     signification: string;
     image: string, 
@@ -29,7 +29,7 @@ Cartes.init(
             allowNull: false,
         },
         signification: {
-            type: DataTypes.STRING(5000), // 5000 caractères max
+            type: DataTypes.TEXT,
             allowNull: false,
         },
         image: {
