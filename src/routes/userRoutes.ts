@@ -1,16 +1,21 @@
 import express from "express" ;
-import { getAllUsers } from "../controllers/userController" ;
+import { getAllUsers, modifyStatus } from "../controllers/userController" ;
+import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware";
 const router = express .Router ();
 
 /**
  * @swagger
  * /users:
  *   get:
- *     summary: Get all users
- *     description: Fetch all the users from the database
+ *     summary: Récupérer tous les utilisateurs
+ *     description: Retourne la liste de tous les utilisateurs enregistrés. Nécessite un token JWT valide.
+ *     tags: 
+ *       - Utilisateurs
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
- *         description: A list of users
+ *         description: Liste des utilisateurs récupérée avec succès.
  *         content:
  *           application/json:
  *             schema:
@@ -20,15 +25,66 @@ const router = express .Router ();
  *                 properties:
  *                   id:
  *                     type: integer
- *                   signification:
+ *                   nom:
  *                     type: string
- *                   image:
+ *                   email:
  *                     type: string
+ *                   premium:
+ *                     type: boolean
+ *       401:
+ *         description: Accès refusé. Cookie ou token manquant.
+ *       403:
+ *         description: Token invalide ou expiré.
  *       500:
- *         description: Internal server error
+ *         description: Erreur serveur.
  */
-router.get("/", getAllUsers);
+router.get("/", verifyTokenMiddleware, getAllUsers);
 
+
+/**
+ * @swagger
+ * /users/modify/{id}:
+ *   put:
+ *     summary: Modifier le statut premium d'un utilisateur
+ *     description: Permet de basculer le statut premium d'un utilisateur (activer/désactiver). Requiert un token JWT.
+ *     tags: 
+ *       - Utilisateurs
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID de l'utilisateur à modifier
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Statut de l'utilisateur modifié avec succès.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 utilisateur:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     premium:
+ *                       type: boolean
+ *       401:
+ *         description: Accès refusé. Cookie ou token manquant.
+ *       403:
+ *         description: Token invalide ou expiré.
+ *       404:
+ *         description: Utilisateur non trouvé.
+ *       500:
+ *         description: Erreur serveur.
+ */
+router.put("/modify/:id", verifyTokenMiddleware, modifyStatus);
 
 
 export default router ;
