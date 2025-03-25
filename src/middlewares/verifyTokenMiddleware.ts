@@ -20,7 +20,7 @@ export function verifyTokenMiddleware(req: Request, res: Response, next: NextFun
 
         // Check token in cookies
         if (!token && req.headers.cookie) {
-            const match = req.headers.cookie.match(/token=([^;]+)/);
+            const match = req.headers.cookie.match(/jwt=([^;]+)/);
             token = match ? match[1] : undefined;
         }
 
@@ -29,6 +29,8 @@ export function verifyTokenMiddleware(req: Request, res: Response, next: NextFun
         res.status(401).json({ message: "Accès refusé. Token manquant." });
         return;
         }
+
+        console.log(token);
 
         // Verify token
         const decoded = jwt.verify(token, JWT_KEY) as jwt.JwtPayload;

@@ -6,7 +6,7 @@ import CartesPremium from "./CartesPremium.model";
 
 interface TiragesAttributes {
     id?: number;
-    utilisateur_id?: string | null;
+    utilisateur_id?: number | null;
     carte_id?: number | null;
     carte_nom?: string | null;
     carte_signification?: string | null;
@@ -20,7 +20,7 @@ interface TiragesAttributes {
 
 class Tirages extends Model<TiragesAttributes> implements TiragesAttributes {
     public id!: number;
-    public utilisateur_id?: string | null;
+    public utilisateur_id?: number | null;
     public carte_id?: number | null;
     public carte_nom?: string | null;
     public carte_signification?: string | null;
@@ -40,7 +40,7 @@ Tirages.init(
             primaryKey: true,
         },
         utilisateur_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: true,
             references: {
                 model: Utilisateurs,

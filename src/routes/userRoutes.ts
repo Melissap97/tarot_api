@@ -84,7 +84,7 @@ router.get("/", verifyTokenMiddleware, getAllUsers);
  *       500:
  *         description: Erreur serveur.
  */
-router.put("/modify/:id", verifyTokenMiddleware, modifyStatus);
+router.put("/modify", verifyTokenMiddleware, modifyStatus);
 
 
 export default router ;

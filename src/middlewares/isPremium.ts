@@ -9,7 +9,7 @@ import { Sequelize } from "sequelize";
 // Extend Request type to include selectedCard
 export interface CustomRequest extends Request {
     user?: {
-        utilisateur_id: string;
+        utilisateur_id: number;
         isPremium?: boolean;
     };
     selectedCard?: any; // Store the randomly selected card

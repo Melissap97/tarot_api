@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import Utilisateurs from "../models/Utilisateurs.model";
+import { CustomRequest } from "../middlewares/isPremium"; 
+import { getUserIdFromPayload } from "../Utils/JWTUtils";
 
 
 export async function getAllUsers(req: Request, res: Response) {
@@ -15,14 +17,19 @@ export async function getAllUsers(req: Request, res: Response) {
 
 export async function modifyStatus(req: Request, res: Response): Promise<void> {
     try {
-        const { id } = req.params;
+        
+        const user = getUserIdFromPayload(req.headers.payload as string);
+                if (!user) {
+                    res.status(404).json({ message: "Utilisateur introuvable" });
+                    return
+                }
 
         // Fetch the user by ID
-        const utilisateur = await Utilisateurs.findByPk(id);
+        const utilisateur = await Utilisateurs.findByPk(user);
 
         if (!utilisateur) {
-             res.status(404).json({ message: "Utilisateur non trouvé" });
-             return;
+            res.status(404).json({ message: "Utilisateur non trouvé." });
+            return;
         }
 
         // Toggle the 'premium' status
@@ -32,7 +39,7 @@ export async function modifyStatus(req: Request, res: Response): Promise<void> {
         await utilisateur.save();
 
         res.status(200).json({ 
-            message: "Status d'utilisateur modifié avec succès", 
+            message: "Statut d'utilisateur modifié avec succès", 
             utilisateur 
         });
 
