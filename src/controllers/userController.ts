@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import Utilisateurs from "../models/Utilisateurs.model";
-import { CustomRequest } from "../middlewares/isPremium"; 
+import Utilisateurs from "../models/Utilisateurs.model"; 
 import { getUserIdFromPayload } from "../Utils/JWTUtils";
 
 

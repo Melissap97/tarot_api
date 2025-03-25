@@ -55,7 +55,7 @@ export async function login(req:Request, res:Response){
             res.status(401).json({message: 'Mot de passe incorrect'});
             return 
         }
-        const token = generateToken({id:user.id});
+        const token = generateToken({id:user.id, isPremium: user.premium});
 
         res.cookie("jwt", token, {httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production"});
         res.status(200).json({message: 'Connexion réussie'});
