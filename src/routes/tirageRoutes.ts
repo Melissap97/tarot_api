@@ -1,7 +1,7 @@
 import express from "express" ;
 import { createTirage, deleteTirage, getTirageParUser } from "../controllers/tirageController" ;
 import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware";
-import { isPremium } from "../middlewares/isPremium";
+import { isPremiumMiddleware } from "../middlewares/isPremiumMiddleware";
 const router = express .Router ();
 
 /**
@@ -50,7 +50,7 @@ const router = express .Router ();
  *       500:
  *         description: Erreur serveur.
  */
-router.post("/nouveauTirage/",verifyTokenMiddleware, isPremium, createTirage)
+router.post("/nouveauTirage/",isPremiumMiddleware, createTirage)
 
 /**
  * @swagger

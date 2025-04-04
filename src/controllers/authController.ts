@@ -58,7 +58,7 @@ export async function login(req:Request, res:Response){
         const token = generateToken({id:user.id, isPremium: user.premium});
 
         res.cookie("jwt", token, {httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production"});
-        res.status(200).json({message: 'Connexion réussie'});
+        res.status(200).json({message: 'Connexion réussie', token});
 
     }catch(error:any){
         res.status(500).json({message: error.message});

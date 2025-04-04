@@ -35,15 +35,15 @@ testConnection().then(() => syncDatabase());
     });
     
     // Upload an image
-     const uploadResult = await cloudinary.uploader
-       .upload(
-           'https://res.cloudinary.com/demo/image/upload/getting-started/shoes.jpg', {
-               public_id: 'shoes',
-           }
-       )
-       .catch((error) => {
-           console.log(error);
-       });
+    const uploadResult = await cloudinary.uploader
+    .upload(
+        'https://res.cloudinary.com/demo/image/upload/getting-started/shoes.jpg', {
+            public_id: 'shoes',
+        }
+    )
+    .catch((error) => {
+        console.log(error);
+    });
     
     console.log(uploadResult);
     
@@ -89,8 +89,8 @@ app.use(
     },
     },
     })
-   );
-   
+);
+
    // Activer CORS uniquement pour une seule origine
 //curl ifconfig.me pour connaître l'ip publique de votre pc
 const corsOptions = {
@@ -98,8 +98,8 @@ const corsOptions = {
     methods: 'GET,POST,DELETE,PUT', // Restreindre les méthodes autorisées
     allowedHeaders: 'Content-Type,Authorization', // Définir les en-têtes acceptés
     credentials: true // Autoriser les cookies et les headers sécurisés
-   };
-   app.use(cors(corsOptions));
+};
+app.use(cors(corsOptions));
 
 
 app.use('/auth', authRoutes);
@@ -110,5 +110,5 @@ app.use('/users', userRoutes);
 // Swagger route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.listen(PORT, () => {
- console.log(`Server is running on http://localhost:${PORT}`);
+console.log(`Server is running on http://localhost:${PORT}`);
 });
