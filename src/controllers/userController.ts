@@ -3,6 +3,22 @@ import Utilisateurs from "../models/Utilisateurs.model";
 import { getUserIdFromPayload } from "../Utils/JWTUtils";
 
 
+export async function getUser(req: Request, res: Response) {
+    //Réupère l'information de l'utilisateur quand il se connecte
+    const user = getUserIdFromPayload(req.headers.payload as string);
+    if (!user) {
+        res.status(404).json({ message: "Utilisateur introuvable" });
+        return
+    }
+    try {
+        const utilisateurs = await Utilisateurs.findByPk(user);
+        res.send(utilisateurs);
+    } catch (error: any) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+
 export async function getAllUsers(req: Request, res: Response) {
     try {
         const utilisateurs = await Utilisateurs.findAll();
@@ -11,8 +27,6 @@ export async function getAllUsers(req: Request, res: Response) {
         res.status(500).json({ error: error.message });
     }
 }
-
-
 
 export async function modifyStatus(req: Request, res: Response): Promise<void> {
     try {

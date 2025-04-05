@@ -1,8 +1,13 @@
 import express from "express" ;
-import { getAllUsers, modifyStatus } from "../controllers/userController" ;
+import { getAllUsers, getUser, modifyStatus } from "../controllers/userController" ;
 import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware";
 const router = express .Router ();
 
+
+
+
+
+router.get("/userInfo",verifyTokenMiddleware, getUser);
 /**
  * @swagger
  * /users:

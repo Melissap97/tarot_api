@@ -31,7 +31,7 @@ export async function login(req:Request, res:Response){
     try {
         const { nom, email, password } = validateSchema(req, loginSchema);
         //Recherche de l'utilisateur par son nom
-         const user= await Utilisateurs.findOne({where:{nom}});
+        const user= await Utilisateurs.findOne({where:{nom}});
 
          //Erreur si nom pas trouvé
         if(!nom){
