@@ -1,5 +1,5 @@
 import express from "express" ;
-import { getAllUsers, getUser, modifyStatus } from "../controllers/userController" ;
+import { getAllUsers, getUserInfo, modifyStatus } from "../controllers/userController" ;
 import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware";
 const router = express .Router ();
 
@@ -7,7 +7,7 @@ const router = express .Router ();
 
 
 
-router.get("/userInfo",verifyTokenMiddleware, getUser);
+router.get("/userInfo",verifyTokenMiddleware, getUserInfo);
 /**
  * @swagger
  * /users:

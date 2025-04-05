@@ -3,7 +3,7 @@ import Utilisateurs from "../models/Utilisateurs.model";
 import { getUserIdFromPayload } from "../Utils/JWTUtils";
 
 
-export async function getUser(req: Request, res: Response) {
+export async function getUserInfo(req: Request, res: Response) {
     //Réupère l'information de l'utilisateur quand il se connecte
     const user = getUserIdFromPayload(req.headers.payload as string);
     if (!user) {
