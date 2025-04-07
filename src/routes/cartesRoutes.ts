@@ -23,7 +23,7 @@ const router = express .Router ();
  *       500:
  *         description: Erreur serveur
  */
-router.get("/", verifyTokenMiddleware, getAllCartes);
+router.get("/cartes", verifyTokenMiddleware, getAllCartes);
 
 /**
  * @swagger

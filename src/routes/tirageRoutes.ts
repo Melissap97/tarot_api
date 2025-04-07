@@ -79,7 +79,7 @@ router.post("/nouveauTirage/",isPremiumMiddleware, createTirage)
  *       500:
  *         description: Erreur serveur
  */
-router.get("/",verifyTokenMiddleware, getTirageParUser);
+router.get("/tirageParUser",verifyTokenMiddleware, getTirageParUser);
 
 /**
  * @swagger
