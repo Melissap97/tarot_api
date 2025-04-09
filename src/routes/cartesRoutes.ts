@@ -23,7 +23,7 @@ const router = express .Router ();
  *       500:
  *         description: Erreur serveur
  */
-router.get("/cartes", verifyTokenMiddleware, getAllCartes);
+router.get("/cartes", getAllCartes);
 
 /**
  * @swagger
@@ -45,5 +45,5 @@ router.get("/cartes", verifyTokenMiddleware, getAllCartes);
  *       500:
  *         description: Erreur serveur
  */
-router.get("/premium",verifyTokenMiddleware, getAllCartesPremium); //ajouter middleware isPremium
+router.get("/premium", getAllCartesPremium); //ajouter middleware isPremium
 export default router ;
