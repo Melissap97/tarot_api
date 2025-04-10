@@ -64,3 +64,14 @@ export async function login(req:Request, res:Response){
         res.status(500).json({message: error.message});
     }
 }
+
+export async function logout(req:Request, res:Response){
+    res.clearCookie('jwt', {
+    httpOnly: true,
+      secure: true,     // true if using HTTPS
+    sameSite: 'lax',
+      path: '/'         // match the path you used when setting the cookie
+    });
+    res.status(200).json({ message: 'Logged out successfully' });
+    return;
+};

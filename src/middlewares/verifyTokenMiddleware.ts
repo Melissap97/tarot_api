@@ -42,7 +42,6 @@ export function verifyTokenMiddleware(req: Request, res: Response, next: NextFun
 
         // Attach user payload to request for later use
         req.headers.payload = JSON.stringify(decoded);
-
         next();
     } catch (error: any) {
         console.error("Erreur d'authentification :", error);

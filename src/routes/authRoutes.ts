@@ -1,5 +1,5 @@
 import express from "express" ;
-import { login, register } from "../controllers/authController";
+import { login, logout, register } from "../controllers/authController";
 import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware";
 
 const router = express .Router ();
@@ -133,6 +133,8 @@ router.post("/register", register);
  *                   example: "Erreur interne du serveur"
  */
 router.post("/login", login)
+
+router.post("/logout", logout)
 
 
 export default router ;

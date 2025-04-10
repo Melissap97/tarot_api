@@ -1,6 +1,5 @@
 import express from "express" ;
 import { getAllCartes, getAllCartesPremium } from "../controllers/cartesController";
-import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware";
 const router = express .Router ();
 
 /**
