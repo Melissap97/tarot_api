@@ -1,6 +1,5 @@
 import bcryptjs from 'bcryptjs'
 
-
 const saltRounds = 10;
 
 export async function hashPassword(password: string): Promise<string> {

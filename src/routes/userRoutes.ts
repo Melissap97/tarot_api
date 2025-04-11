@@ -3,10 +3,6 @@ import { getAllUsers, getUserInfo, modifyStatus } from "../controllers/userContr
 import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware";
 const router = express .Router ();
 
-
-
-
-
 router.get("/userInfo",verifyTokenMiddleware, getUserInfo);
 /**
  * @swagger

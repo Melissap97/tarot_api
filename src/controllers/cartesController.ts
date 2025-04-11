@@ -9,7 +9,7 @@ export async function getAllCartes(req: Request, res: Response) {
     } catch (error: any) {
         res.status(500).json({ error: error.message });
     }
-}
+} 
 
 export async function getCarte(carte_id: number) {
     

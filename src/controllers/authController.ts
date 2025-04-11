@@ -7,6 +7,7 @@ import { generateToken } from "../Utils/JWTUtils";
 
 export async function register(req:Request, res:Response){
     try{
+        //Validation du schema
         const { nom, password, email } = validateSchema(req, registerSchema);
         //Erreur si les champs sont vides
         if(!nom || !password || !email ){
@@ -66,12 +67,8 @@ export async function login(req:Request, res:Response){
 }
 
 export async function logout(req:Request, res:Response){
-    res.clearCookie('jwt', {
-    httpOnly: true,
-      secure: true,     // true if using HTTPS
-    sameSite: 'lax',
-      path: '/'         // match the path you used when setting the cookie
-    });
+    //Enlève le token
+    res.clearCookie('jwt', {httpOnly: true, secure: true, sameSite: 'lax', path: '/' });
     res.status(200).json({ message: 'Logged out successfully' });
     return;
 };
