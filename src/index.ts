@@ -12,7 +12,6 @@ import tirageRoutes from './routes/tirageRoutes';
 import cartesRoutes from './routes/cartesRoutes';
 import userRoutes from './routes/userRoutes';
 
-
 //Création d'un serveur Express
 const app = express();
 //chargement des variables d'environnement
@@ -66,20 +65,15 @@ testConnection().then(() => syncDatabase());
     console.log(autoCropUrl);    
 })();
 
-//TODO ajouter ici connection à la BDD
-//TODO ajouter ici les routes
-//app.listen indique au serveur d'écouter les requêtes HTTP arrivant sur le
-//port indiqué
-
-// Activer helmet pour sécuriser les en-têtes HTTP
+// Helmet pour sécuriser les en-têtes HTTP
 app.use(
     helmet({
     contentSecurityPolicy: {
     directives: {
     defaultSrc: ["'self'"],
     scriptSrc: ["'self'", "'nonce-random123'"],
-    styleSrc: ["'self'"], // Supprimer 'strict-dynamic'
-    imgSrc: ["'self'"], // Supprimer 'data:'
+    styleSrc: ["'self'"], 
+    imgSrc: ["'self'"], 
     objectSrc: ["'none'"],
     baseUri: ["'self'"],
     formAction: ["'self'"],
@@ -91,8 +85,7 @@ app.use(
     })
 );
 
-   // Activer CORS uniquement pour une seule origine
-//curl ifconfig.me pour connaître l'ip publique de votre pc
+// Activer CORS uniquement pour une seule origine
 const corsOptions = {
     origin: process.env.CLIENT_URL || "http://localhost:4200", // Placer le domaine du client pour l'autoriser
     methods: 'GET,POST,DELETE,PUT', // Restreindre les méthodes autorisées

@@ -18,13 +18,11 @@ export function verifyTokenMiddleware(req: Request, res: Response, next: NextFun
             token = req.headers.authorization.split(" ")[1];
         }
 
-        // Check token in cookies
+        // Check token dans cookies
         if (!token && req.headers.cookie) {
             const match = req.headers.cookie.match(/jwt=([^;]+)/);
             token = match ? match[1] : undefined;
         }
-
-        // If no token found
         if (!token) {
         res.status(401).json({ message: "Accès refusé. Token manquant." });
         return;
@@ -40,7 +38,7 @@ export function verifyTokenMiddleware(req: Request, res: Response, next: NextFun
         return;
         }
 
-        // Attach user payload to request for later use
+        // Attache user payload dans la requete
         req.headers.payload = JSON.stringify(decoded);
         next();
     } catch (error: any) {
