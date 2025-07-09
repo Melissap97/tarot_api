@@ -4,12 +4,12 @@ const router = express .Router ();
 
 /**
  * @swagger
- * /cartes:
+ * /cartes/cartes:
  *   get:
  *     summary: Récupérer toutes les cartes
- *     description: Renvoie la liste de toutes les cartes disponibles.
+ *     description: Renvoie la liste de toutes les cartes disponibles dans la galerie.
  *     tags:
- *       - Cartes
+ *       - Galerie
  *     responses:
  *       200:
  *         description: Liste des cartes récupérée avec succès
@@ -29,9 +29,9 @@ router.get("/cartes", getAllCartes);
  * /cartes/premium:
  *   get:
  *     summary: Récupérer toutes les cartes premium
- *     description: Renvoie la liste de toutes les cartes premium disponibles.
+ *     description: Renvoie la liste de toutes les cartes premium disponibles dans la galerie.
  *     tags:
- *       - Cartes
+ *       - Galerie
  *     responses:
  *       200:
  *         description: Liste des cartes premium récupérée avec succès

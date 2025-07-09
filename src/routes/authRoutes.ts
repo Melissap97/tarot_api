@@ -88,7 +88,7 @@ router.post("/register", register);
  *               password:
  *                 type: string
  *                 format: password
- *                 example: "password@0"
+ *                 example: "password0@"
  *     responses:
  *       200:
  *         description: Connexion réussie
@@ -133,6 +133,38 @@ router.post("/register", register);
  */
 router.post("/login", login)
 
+/**
+ * @swagger
+ * /auth/logout:
+ *   post:
+ *     summary: Déconnexion de l'utilisateur
+ *     description: Supprime le cookie JWT pour déconnecter l'utilisateur. Retourne une erreur si aucun token n'est trouvé.
+ *     tags:
+ *       - Authentification
+ *     responses:
+ *       200:
+ *         description: Déconnexion réussie
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Logged out successfully
+ *       401:
+ *         description: Token non trouvé, utilisateur non connecté
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Token non trouvé, utilisateur non connecté
+ *       500:
+ *         description: Erreur serveur lors de la déconnexion
+ */
 router.post("/logout", logout)
 
 

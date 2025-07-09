@@ -54,30 +54,42 @@ router.post("/nouveauTirage/",isPremiumMiddleware, createTirage)
 
 /**
  * @swagger
- * /tirages/{id}:
+ * /tirages/tirageParUser:
  *   get:
- *     summary: Récupérer les tirages de l'utilisateur connecté
- *     description: Renvoie la liste des tirages effectués par l'utilisateur dont l'ID est extrait du payload.
+ *     summary: Récupérer les tirages d'un utilisateur
+ *     description: Renvoie la liste des tirages effectués par l'utilisateur connecté.
  *     tags:
  *       - Tirages
+ *     security:
+ *       - cookieAuth: []
  *     responses:
  *       200:
- *         description: Liste des tirages de l'utilisateur connecté
+ *         description: Liste des tirages récupérée avec succès
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                 tirage:
- *                   type: array
- *                   items:
- *                     type: object
- *       404:
- *         description: Utilisateur non trouvé
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   utilisateur_id:
+ *                     type: integer
+ *                   carte_id:
+ *                     type: integer
+ *                   carte_nom:
+ *                     type: string
+ *                   carte_signification:
+ *                     type: string
+ *                   carte_image: 
+ *                     type: string
+ *       401:
+ *         description: L'utilisateur n'est pas authentifié.
+ *       403:
+ *         description: Le token est invalide ou expiré.
  *       500:
- *         description: Erreur serveur
+ *         description: Erreur serveur.
  */
 router.get("/tirageParUser",verifyTokenMiddleware, getTirageParUser);
 

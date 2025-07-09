@@ -4,41 +4,7 @@ import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware";
 const router = express .Router ();
 
 router.get("/userInfo",verifyTokenMiddleware, getUserInfo);
-/**
- * @swagger
- * /users:
- *   get:
- *     summary: Récupérer tous les utilisateurs
- *     description: Retourne la liste de tous les utilisateurs enregistrés. Nécessite un token JWT valide.
- *     tags: 
- *       - Utilisateurs
- *     security:
- *       - BearerAuth: []
- *     responses:
- *       200:
- *         description: Liste des utilisateurs récupérée avec succès.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                   nom:
- *                     type: string
- *                   email:
- *                     type: string
- *                   premium:
- *                     type: boolean
- *       401:
- *         description: Accès refusé. Cookie ou token manquant.
- *       403:
- *         description: Token invalide ou expiré.
- *       500:
- *         description: Erreur serveur.
- */
+
 router.get("/", verifyTokenMiddleware, getAllUsers);
 
 
