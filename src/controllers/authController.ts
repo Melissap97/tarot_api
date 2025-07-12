@@ -58,7 +58,11 @@ export async function login(req:Request, res:Response){
         }
         const token = generateToken({id:user.id, isPremium: user.premium});
 
-        res.cookie("jwt", token, {httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production"});
+        res.cookie("jwt", token, {
+          httpOnly: true,
+          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+          secure: process.env.NODE_ENV === "production",
+        });
         res.status(200).json({message: 'Connexion réussie', token});
 
     }catch(error:any){
